@@ -2,10 +2,13 @@ module.exports = {
   transpileDependencies: true,
   devServer: {
     proxy: {
-      '^/v2': {
-        target: 'https://api.geodatasource.com',
+      '^/api/landlocation': {
+        target: 'https://api.3geonames.org',
         changeOrigin: true,
-        secure: false
+        secure: false,
+        pathRewrite: {
+          '^/api/landlocation': ''
+        }
       },
     }
   }
