@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import {countryList} from "./countryList.js"
+
 export default {
 name: "NearestCountry",
   data: function(){
@@ -24,7 +26,7 @@ name: "NearestCountry",
           let url = `api/landlocation?randomland=yes&json=1`;
           const res = await fetch(url);
            let res_json = await res.json();
-           this.countryData = res_json["nearest"]["state"];
+           this.countryData = countryList[res_json["nearest"]["state"]];
            this.latitude =  res_json["nearest"]["latt"];
             this.longitude =  res_json["nearest"]["longt"];
         }
