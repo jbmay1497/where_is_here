@@ -7,11 +7,12 @@ export default {
   name: "ChoiceItem",
   props: {
     title: String,
-    correctChoice: String
+    correctChoice: String,
   },
   data() {
     return {
-      isCorrect: null
+      isCorrect: null,
+      currentQuestion: this.curQuestion
     }
   },
   methods: {

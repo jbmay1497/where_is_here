@@ -6,6 +6,7 @@
   <ChoiceList
       :titles = "countryChoices"
       :correct-choice="correctCountry"
+      :cur-question="curQuestion"
       v-on:choiceSelected='handleSelectedChoice'/>
 </template>
 
@@ -22,7 +23,8 @@ name: "NearestCountry",
       longitude: null,
       correctCountry: null,
       countryChoices:null,
-      gameWon: false
+      gameWon: false,
+      curQuestion: 1
     }
   },
   async created () {
@@ -71,6 +73,7 @@ name: "NearestCountry",
         handleSelectedChoice(isCorrect){
           if (isCorrect){
             this.gameWon = true;
+            this.curQuestion+=1;
             this.roundSetup()
           }
         }

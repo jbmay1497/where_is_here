@@ -5,6 +5,7 @@
   <ChoiceList
       :titles = "locationOptions"
       :correct-choice="correctLocation"
+      :cur-question="curQuestion"
       v-on:choiceSelected='handleSelectedChoice'/>
 </template>
 
@@ -19,8 +20,9 @@ export default {
      latitude: null,
      longitude: null,
      correctLocation: null,
-     locationOptions: null,
-     gameWon: false
+     locationOptions: ["Water", "Land"],
+     gameWon: false,
+     curQuestion: 1
    }
 
  },
@@ -33,7 +35,6 @@ export default {
       await this.generateLatitude();
       await this.generateLongitude();
       await this.getWaterOrLand(this.latitude, this.longitude);
-      this.locationOptions = ["Water", "Land"];
     },
      generateLatitude() {
       this.latitude = (Math.random() * 90 * (Math.random() < 0.5 ? -1 : 1)).toFixed(2);
@@ -56,7 +57,9 @@ export default {
     handleSelectedChoice(isCorrect){
       if (isCorrect){
         this.gameWon = true;
+        this.curQuestion+=1;
         this.roundSetup();
+
       }
     }
   }

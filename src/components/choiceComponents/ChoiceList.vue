@@ -3,7 +3,7 @@
     <ChoiceItem v-for="title in titles"
                 :title='title'
                 :correctChoice='correctChoice'
-                :key="title"
+                :key="`${title}${curQuestion}`"
                 v-on:choiceSelected='handleSelectedChoice'
     ></ChoiceItem>
   </span>
@@ -20,7 +20,8 @@ name: "ChoiceList",
   },
   props: {
     titles: Object,
-    correctChoice:String
+    correctChoice:String,
+    curQuestion: Number
   },
   methods: {
     handleSelectedChoice(isCorrect){
