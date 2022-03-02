@@ -1,9 +1,12 @@
 <template>
   <h3>Installed CLI Plugins</h3>
-  <div>{{this.latitude}}</div>
-  <div>{{this.longitude}}</div>
+  <span>{{this.latitude}} {{this.longitude}}</span>
   <div>{{this.correctCountry}}</div>
-  <ChoiceList :titles = "countryChoices"/>
+  <div>{{this.gameWon}}</div>
+  <ChoiceList
+      :titles = "countryChoices"
+      :correct-choice="correctCountry"
+      v-on:choiceSelected='handleSelectedChoice'/>
 </template>
 
 <script>
@@ -18,7 +21,8 @@ name: "NearestCountry",
       latitude: null,
       longitude: null,
       correctCountry: null,
-      countryChoices:null
+      countryChoices:null,
+      gameWon: false
     }
   },
   async created () {
@@ -35,9 +39,9 @@ name: "NearestCountry",
            this.latitude =  res_json["nearest"]["latt"];
             this.longitude =  res_json["nearest"]["longt"];
         },
+
         async generateCountryChoices(numChoices){
           let countryChoices = [this.correctCountry];
-
           let countryCodes = Object.keys(countryList);
           for (let i = 0; i < numChoices-1; i++){
             let curCountry =  countryList[countryCodes[ countryCodes.length * Math.random() << 0]];
@@ -49,6 +53,7 @@ name: "NearestCountry",
           }
           this.countryChoices = this.shuffleCountries(countryChoices);
         },
+
          shuffleCountries(countryArray) {
           for (let i = countryArray.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
@@ -57,7 +62,13 @@ name: "NearestCountry",
             countryArray[j] = temp;
             }
            return countryArray;
+          },
+
+        handleSelectedChoice(isCorrect){
+          if (isCorrect){
+            this.gameWon = true;
           }
+        }
 
       }
 }

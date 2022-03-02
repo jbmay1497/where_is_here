@@ -1,7 +1,13 @@
 <template>
-  <span class="row" v-for="title in titles" :key="title">
-    <ChoiceItem  :title='title'/>
+  <span>
+    <ChoiceItem v-for="title in titles"
+                :title='title'
+                :correctChoice='correctChoice'
+                :key="title"
+                v-on:choiceSelected='handleSelectedChoice'
+    ></ChoiceItem>
   </span>
+
 </template>
 
 <script>
@@ -14,7 +20,13 @@ name: "ChoiceList",
   },
   props: {
     titles: Object,
+    correctChoice:String
   },
+  methods: {
+    handleSelectedChoice(isCorrect){
+      this.$emit('choiceSelected',isCorrect)
+    }
+  }
 }
 </script>
 
