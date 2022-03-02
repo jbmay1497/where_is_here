@@ -19,20 +19,23 @@ export default {
      latitude: null,
      longitude: null,
      correctLocation: null,
-     locationOptions: ["Water", "Land"],
+     locationOptions: null,
      gameWon: false
    }
 
  },
   async created () {
-    this.generateLatitude();
-    this.generateLongitude();
-  },
-  async beforeMount(){
-    await this.getWaterOrLand(this.latitude, this.longitude);
+    await this.roundSetup();
+
   },
   methods: {
-    generateLatitude() {
+    async roundSetup(){
+      await this.generateLatitude();
+      await this.generateLongitude();
+      await this.getWaterOrLand(this.latitude, this.longitude);
+      this.locationOptions = ["Water", "Land"];
+    },
+     generateLatitude() {
       this.latitude = (Math.random() * 90 * (Math.random() < 0.5 ? -1 : 1)).toFixed(2);
       return this.latitude;
     },
@@ -53,6 +56,7 @@ export default {
     handleSelectedChoice(isCorrect){
       if (isCorrect){
         this.gameWon = true;
+        this.roundSetup();
       }
     }
   }

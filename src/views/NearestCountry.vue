@@ -26,11 +26,15 @@ name: "NearestCountry",
     }
   },
   async created () {
-    await this.getcorrectCountry();
-    await this.generateCountryChoices(4);
+    await this.roundSetup();
+
   },
   methods:
       {
+        async roundSetup(){
+          await this.getcorrectCountry();
+          await this.generateCountryChoices(4);
+        },
         async getcorrectCountry(){
           let url = `api/landlocation?randomland=yes&json=1`;
           const res = await fetch(url);
@@ -67,6 +71,7 @@ name: "NearestCountry",
         handleSelectedChoice(isCorrect){
           if (isCorrect){
             this.gameWon = true;
+            this.roundSetup()
           }
         }
 
