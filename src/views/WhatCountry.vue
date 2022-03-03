@@ -1,6 +1,16 @@
 <template>
-  <h3>Installed CLI Plugins</h3>
-  <span>{{this.latitude}} {{this.longitude}}</span>
+    <span>
+      <LatLongDisplay
+          :val="this.latitude"
+      />
+      <LatLongDisplay
+          :val="this.longitude"
+      />
+      </span>
+  <div class="label-container">
+    <span class="label">Latitude</span>
+    <span class="label">Longitude</span>
+  </div>
   <div>{{this.correctCountry}}</div>
   <div>{{this.numGuesses}}</div>
   <div>Current Streak: {{this.curStreak}}</div>
@@ -22,13 +32,14 @@
 </template>
 
 <script>
-import {countryList} from "./countryList.js"
-import ChoiceList from '../components/choiceComponents/ChoiceList.vue'
-import RoundOverModal from '../components/modalComponents/RoundOverModal.vue'
+import {countryList} from "./countryList.js";
+import ChoiceList from '../components/choiceComponents/ChoiceList.vue';
+import RoundOverModal from '../components/modalComponents/RoundOverModal.vue';
+import LatLongDisplay from '../components/LatLongDisplay.vue';
 
 export default {
 name: "NearestCountry",
-  components: {ChoiceList, RoundOverModal},
+  components: {LatLongDisplay, ChoiceList, RoundOverModal},
   data: function(){
     return{
       latitude: null,
@@ -113,5 +124,14 @@ name: "NearestCountry",
 </script>
 
 <style scoped>
+.label {
+  font-size:20px;
+  margin-left: 6%;
+  margin-right: 6%;
 
+}
+
+.label-container {
+  margin-bottom: 2%;
+}
 </style>

@@ -1,5 +1,17 @@
 <template>
-    <span>{{this.latitude}} {{this.longitude}}</span>
+    <span>
+      <LatLongDisplay
+          :val="this.latitude"
+      />
+      <LatLongDisplay
+          :val="this.longitude"
+      />
+      </span>
+
+ <div class="label-container">
+   <span class="label">Latitude</span>
+   <span class="label">Longitude</span>
+ </div>
     <div>{{this.correctLocation}}</div>
   <div>Current Streak: {{this.curStreak}}</div>
   <div>Max Streak: {{this.maxStreak}}</div>
@@ -20,12 +32,14 @@
 </template>
 
 <script>
-import ChoiceList from '../components/choiceComponents/ChoiceList.vue'
-import RoundOverModal from '../components/modalComponents/RoundOverModal.vue'
+import ChoiceList from '../components/choiceComponents/ChoiceList.vue';
+import RoundOverModal from '../components/modalComponents/RoundOverModal.vue';
+import LatLongDisplay from '../components/LatLongDisplay.vue';
 
 export default {
   name: "WaterOrLand",
   components: {
+    LatLongDisplay,
     ChoiceList,
     RoundOverModal
   },
@@ -98,5 +112,15 @@ export default {
 </script>
 
 <style scoped>
+.label {
+  font-size:20px;
+  margin-left: 6%;
+  margin-right: 6%;
+
+}
+
+.label-container {
+  margin-bottom: 2%;
+}
 
 </style>

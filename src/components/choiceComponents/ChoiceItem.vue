@@ -39,5 +39,9 @@ export default {
 </script>
 
 <style scoped>
-
+.btn{
+  margin-top:1%;
+  margin-left:.25em;
+  margin-right:.25em;
+}
 </style>
