@@ -10,7 +10,7 @@ npm install
 npm run serve
 ```
 
-##Web App Info
+## Web App Info
 ```
 This project provides 2 coordinate based guessing games based ona latitude and longitude position:
 
