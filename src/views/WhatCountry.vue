@@ -69,6 +69,10 @@ name: "NearestCountry",
           await this.getcorrectCountry();
           await this.generateCountryChoices(this.numChoices);
         },
+
+        //uses the API from [https://3geonames.org/]
+        //the api server does not have CORS enabled, so itn is necessary to first proxy Vue's dev server 
+        //in order to make the API call (the code for which can be found in vue.config.js)
         async getcorrectCountry(){
           let url = `api/landlocation?randomland=yes&json=1`;
           const res = await fetch(url);

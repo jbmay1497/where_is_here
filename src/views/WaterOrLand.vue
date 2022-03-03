@@ -81,6 +81,7 @@ export default {
       return this.longitude
     },
 
+  //uses api from https://onwater.io/
     async getWaterOrLand(latitude, longitude) {
       const key = '1yuKk6UQrfcBLdx_Afds';
       let url = `https://api.onwater.io/api/v1/results/${latitude},${longitude}?access_token=${key}`;

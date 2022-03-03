@@ -10,15 +10,16 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+##Web App Info
 ```
-npm run build
-```
+This project provides 2 coordinate based guessing games based ona latitude and longitude position:
 
-### Lints and fixes files
-```
-npm run lint
-```
+1.Water or Land?
+2.What Country?
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Each uses a different API to get / locate the coordinates. The game "Water or Land?" uses the API from [https://onwater.io/](https://onwater.io/) to determine
+if a position from a randomly generated Latitude and Longitude is lcoated on land or in the water. 
+
+The game "What Country?" uses the API from [https://3geonames.org/](https://3geonames.org/) to return a random Latitude and Longitude position that is located on land.
+
+Both games also use the [Google Maps API](https://developers.google.com/maps) to display the coordinate on a map at the end of each round.
