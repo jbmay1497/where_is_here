@@ -1,5 +1,4 @@
 <template>
-  <div>
     <span>{{this.latitude}} {{this.longitude}}</span>
     <div>{{this.correctLocation}}</div>
     <div>{{this.gameWon}}</div>
@@ -11,13 +10,11 @@
     <RoundOverModal
         :show="gameWon"
     />
-  </div>
-
 </template>
 
 <script>
 import ChoiceList from '../components/choiceComponents/ChoiceList.vue'
-import RoundOverModal from '../components/RoundOverModal.vue'
+import RoundOverModal from '../components/modalComponents/RoundOverModal.vue'
 
 export default {
   name: "WaterOrLand",
@@ -31,7 +28,7 @@ export default {
      correctLocation: null,
      locationOptions: ["Water", "Land"],
      gameWon: false,
-     curQuestion: 1
+     curQuestion: 1,
    }
 
  },
