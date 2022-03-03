@@ -37,10 +37,14 @@ export default {
     }
   },
   mounted() {
-    console.log(window.google);
+    let latLng = {lat: this.latitude, lng: this.longitude};
     this.map = new window.google.maps.Map(document.getElementById("map"), {
-      center: {lat: this.latitude, lng: this.longitude},
-      zoom: 7,
+      center: latLng,
+      zoom: 4,
+    })
+    new window.google.maps.Marker({
+      position: latLng,
+      map: this.map
     })
   },
   methods:

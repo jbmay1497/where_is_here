@@ -26,7 +26,6 @@
       :origin="'whatCountry'"
       v-on:nextLocation='roundSetup'
   />
-  <div>{{this.correctCountry}}</div>
   <div>Round: {{this.curRound}}</div>
   <div>Guesses Remaining: {{this.numGuesses}}</div>
   <div>Current Streak: {{this.curStreak}}</div>

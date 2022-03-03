@@ -43,5 +43,6 @@ export default {
   margin-top:1%;
   margin-left:.25em;
   margin-right:.25em;
+  margin-bottom:.25em;
 }
 </style>

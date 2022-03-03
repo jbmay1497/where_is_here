@@ -26,7 +26,6 @@
         :origin="'waterOrLand'"
         v-on:nextLocation='roundSetup'
     />
-  <div>{{this.correctLocation}}</div>
   <div>Round: {{this.curRound}}</div>
   <div>Current Streak: {{this.curStreak}}</div>
   <div>Max Streak: {{this.maxStreak}}</div>
