@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="btn" :class="buttonClass"  @click.prevent='checkCorrect'>{{ title }}</button>
+  <button type="button" class="btn btn-lg" :class="buttonClass"  @click.prevent='checkCorrect'>{{ title }}</button>
 </template>
 
 <script>

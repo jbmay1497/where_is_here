@@ -12,13 +12,10 @@
    <span class="label">Latitude</span>
    <span class="label">Longitude</span>
  </div>
-    <div>{{this.correctLocation}}</div>
-  <div>Current Streak: {{this.curStreak}}</div>
-  <div>Max Streak: {{this.maxStreak}}</div>
     <ChoiceList
         :titles = "locationOptions"
         :correct-choice="correctLocation"
-        :cur-question="curQuestion"
+        :cur-question="curRound"
         v-on:choiceSelected='handleSelectedChoice'/>
     <RoundOverModal
         v-if="roundOver"
@@ -29,6 +26,10 @@
         :origin="'waterOrLand'"
         v-on:nextLocation='roundSetup'
     />
+  <div>{{this.correctLocation}}</div>
+  <div>Round: {{this.curRound}}</div>
+  <div>Current Streak: {{this.curStreak}}</div>
+  <div>Max Streak: {{this.maxStreak}}</div>
 </template>
 
 <script>
@@ -52,7 +53,7 @@ export default {
       roundOver: null,
       roundWon: null,
       numGuesses: null,
-      curQuestion: 1,
+      curRound: 1,
       curStreak:0,
       maxStreak:0,
     }
@@ -92,7 +93,7 @@ export default {
       if (isCorrect) {
         this.roundWon = true;
         this.roundOver = true;
-        this.curQuestion += 1;
+        this.curRound += 1;
         this.curStreak+=1;
         if (this.curStreak > this.maxStreak){
           this.maxStreak = this.curStreak
@@ -102,7 +103,7 @@ export default {
         if (this.numGuesses === 0) {
           this.roundWon = false;
           this.roundOver = true;
-          this.curQuestion += 1;
+          this.curRound += 1;
           this.curStreak = 0;
         }
       }
@@ -113,14 +114,14 @@ export default {
 
 <style scoped>
 .label {
-  font-size:20px;
+  font-size:30px;
   margin-left: 6%;
   margin-right: 6%;
 
 }
 
 .label-container {
-  margin-bottom: 2%;
+  margin-bottom: 1%;
 }
 
 </style>

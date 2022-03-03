@@ -11,14 +11,11 @@
     <span class="label">Latitude</span>
     <span class="label">Longitude</span>
   </div>
-  <div>{{this.correctCountry}}</div>
-  <div>{{this.numGuesses}}</div>
-  <div>Current Streak: {{this.curStreak}}</div>
-  <div>Max Streak: {{this.maxStreak}}</div>
+
   <ChoiceList
       :titles = "countryChoices"
       :correct-choice="correctCountry"
-      :cur-question="curQuestion"
+      :cur-question="curRound"
       v-on:choiceSelected='handleSelectedChoice'/>
   <RoundOverModal
       v-if="roundOver"
@@ -29,6 +26,11 @@
       :origin="'whatCountry'"
       v-on:nextLocation='roundSetup'
   />
+  <div>{{this.correctCountry}}</div>
+  <div>Round: {{this.curRound}}</div>
+  <div>Guesses Remaining: {{this.numGuesses}}</div>
+  <div>Current Streak: {{this.curStreak}}</div>
+  <div>Max Streak: {{this.maxStreak}}</div>
 </template>
 
 <script>
@@ -50,7 +52,7 @@ name: "NearestCountry",
       roundWon: null,
       numChoices:4,
       numGuesses:null,
-      curQuestion: 1,
+      curRound: 1,
       curStreak:0,
       maxStreak:0,
     }
@@ -104,7 +106,7 @@ name: "NearestCountry",
           if (isCorrect){
             this.roundWon = true;
             this.roundOver = true;
-            this.curQuestion+=1;
+            this.curRound+=1;
             this.curStreak+=1;
             if (this.curStreak > this.maxStreak){
               this.maxStreak = this.curStreak
@@ -125,7 +127,7 @@ name: "NearestCountry",
 
 <style scoped>
 .label {
-  font-size:20px;
+  font-size:30px;
   margin-left: 6%;
   margin-right: 6%;
 

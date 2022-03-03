@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar  navbar-dark bg-dark py-3">
     <div class="container-fluid-nav text-center">
-      <router-link class="navbar-brand" to="/">Where is Here?</router-link>
+      <router-link class="navbar-brand" to="/">Where am I?</router-link>
     </div>
 
   </nav>
