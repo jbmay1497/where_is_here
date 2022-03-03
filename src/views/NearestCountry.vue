@@ -8,15 +8,21 @@
       :correct-choice="correctCountry"
       :cur-question="curQuestion"
       v-on:choiceSelected='handleSelectedChoice'/>
+  <RoundOverModal
+      v-if="gameWon"
+      :latitude="latitude"
+      :longitude="longitude"
+  />
 </template>
 
 <script>
 import {countryList} from "./countryList.js"
 import ChoiceList from '../components/choiceComponents/ChoiceList.vue'
+import RoundOverModal from '../components/modalComponents/RoundOverModal.vue'
 
 export default {
 name: "NearestCountry",
-  components: {ChoiceList},
+  components: {ChoiceList, RoundOverModal},
   data: function(){
     return{
       latitude: null,
@@ -42,8 +48,8 @@ name: "NearestCountry",
           const res = await fetch(url);
            let res_json = await res.json();
            this.correctCountry = countryList[res_json["nearest"]["state"]];
-           this.latitude =  res_json["nearest"]["latt"];
-            this.longitude =  res_json["nearest"]["longt"];
+           this.latitude =  Math.round(parseFloat(res_json["nearest"]["latt"])*100)/100;
+            this.longitude =  Math.round(parseFloat(res_json["nearest"]["longt"])*100)/100;
         },
 
         async generateCountryChoices(numChoices){
