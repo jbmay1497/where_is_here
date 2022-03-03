@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/HomePage.vue'
-import NearestCountry from '../views/NearestCountry.vue'
+import NearestCountry from '../views/WhatCountry.vue'
 import WaterOrLand from '../views/WaterOrLand.vue'
 
 const routes = [
