@@ -16,9 +16,9 @@
 
 <script>
 export default {
-name: "correctChoiceModal",
+  name: "RoundOverModal",
   props: {
-  show: Boolean
+    show: Boolean
   }
 }
 </script>
