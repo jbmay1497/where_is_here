@@ -23,7 +23,7 @@
       :longitude="longitude"
       :roundWon="roundWon"
       :location="correctCountry"
-      :origin="'whatCountry'"
+      :origin="'whatcountry'"
       v-on:nextLocation='roundSetup'
   />
   <div>Round: {{this.curRound}}</div>
@@ -95,6 +95,9 @@ name: "NearestCountry",
           this.countryChoices = this.shuffleCountries(countryChoices);
         },
 
+       
+         //shuffles country choice array so the answer is not always the first option
+         //source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
          shuffleCountries(countryArray) {
           for (let i = countryArray.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));

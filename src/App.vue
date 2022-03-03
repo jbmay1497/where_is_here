@@ -6,7 +6,7 @@
               @click.prevent="displayRules">Rules</button>
       <RulesModal
         v-if="showRules"
-       v-on:closeModal="closeModal"
+       v-on:closeRules="closeRules"
         />
     </div>
 
@@ -28,7 +28,7 @@ export default {
     displayRules(){
       this.showRules = true;
     },
-    closeModal(){
+    closeRules(){
       this.showRules = false;
     }
   }

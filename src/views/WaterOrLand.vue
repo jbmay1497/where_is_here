@@ -23,7 +23,7 @@
         :longitude="longitude"
         :roundWon="roundWon"
         :location="correctLocation"
-        :origin="'waterOrLand'"
+        :origin="'waterorland'"
         v-on:nextLocation='roundSetup'
     />
   <div>Round: {{this.curRound}}</div>
@@ -80,6 +80,7 @@ export default {
       return this.longitude
     },
 
+  //determines whether the randomly generated lat and long coordinates are located on land or in the water
   //uses api from https://onwater.io/
     async getWaterOrLand(latitude, longitude) {
       const key = '1yuKk6UQrfcBLdx_Afds';

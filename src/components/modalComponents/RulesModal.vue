@@ -29,7 +29,7 @@
               
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" @click.prevent="closeModal">Close</button>
+          <button type="button" class="btn btn-primary" @click.prevent="closeRules">Close</button>
         </div>
       </div>
     </div>
@@ -42,8 +42,8 @@ export default {
   name: "RulesModal",
   methods:
       {
-        closeModal(){
-          this.$emit('closeModal')
+        closeRules(){
+          this.$emit('closeRules')
         }
       }
 }
