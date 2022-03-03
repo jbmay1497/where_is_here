@@ -59,7 +59,7 @@ export default {
 }
 
 .navbar-brand{
-margin-left:6%
+margin-left:6.5%
 }
 
 #rule-btn{
