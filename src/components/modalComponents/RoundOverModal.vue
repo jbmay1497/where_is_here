@@ -1,5 +1,5 @@
-<template>
-  <div class="modal" v-if="show">
+<template v-if="show">
+  <div class="modal" >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header" id="map">
