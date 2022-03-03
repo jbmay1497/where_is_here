@@ -8,7 +8,9 @@
         :cur-question="curQuestion"
         v-on:choiceSelected='handleSelectedChoice'/>
     <RoundOverModal
-        :show="gameWon"
+        v-if="gameWon"
+        :latitude="latitude"
+        :longitude="longitude"
     />
 </template>
 
@@ -43,12 +45,12 @@ export default {
       await this.getWaterOrLand(this.latitude, this.longitude);
     },
      generateLatitude() {
-      this.latitude = (Math.random() * 90 * (Math.random() < 0.5 ? -1 : 1)).toFixed(2);
+      this.latitude = Math.round((Math.random() * 90 * (Math.random() < 0.5 ? -1 : 1))*100)/100;
       return this.latitude;
     },
 
     generateLongitude() {
-      this.longitude = (Math.random() * 180 * (Math.random() < 0.5 ? -1 : 1)).toFixed(2);
+      this.longitude = Math.round((Math.random() * 180 * (Math.random() < 0.5 ? -1 : 1))*100)/100;
       return this.longitude
     },
 
