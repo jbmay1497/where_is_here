@@ -1,5 +1,5 @@
-<template v-if="show">
-  <div class="modal" >
+<template >
+  <div class="modal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header" id="map">
@@ -17,7 +17,8 @@
 export default {
   name: "RoundOverModal",
   props: {
-    show: Boolean
+    latitude: Number,
+    longitude: Number
   },
   data: function() {
     return {
@@ -27,7 +28,7 @@ export default {
   mounted() {
     console.log(window.google);
     this.map = new window.google.maps.Map(document.getElementById("map"), {
-      center: {lat: -34.397, lng: 150.644},
+      center: {lat: this.latitude, lng: this.longitude},
       zoom: 7,
     })
   }
