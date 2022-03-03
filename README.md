@@ -14,8 +14,8 @@ npm run serve
 
 This project provides 2 coordinate based guessing games based ona latitude and longitude position:
 
-1.Water or Land?
-2.What Country?
+1. Water or Land?
+2. What Country?
 
 Each uses a different API to get / locate the coordinates. The game "Water or Land?" uses the API from [https://onwater.io/](https://onwater.io/) to determine
 if a position from a randomly generated Latitude and Longitude is lcoated on land or in the water. 
