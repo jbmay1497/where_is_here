@@ -11,7 +11,7 @@ npm run serve
 ```
 
 ## Web App Info
-```
+
 This project provides 2 coordinate based guessing games based ona latitude and longitude position:
 
 1.Water or Land?
