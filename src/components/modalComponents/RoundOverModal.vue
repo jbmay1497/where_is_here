@@ -13,7 +13,6 @@
           <p v-else>Latitude {{latitude}} and Longitude {{longitude}} is located in  {{location}}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary">Play Another Game</button>
           <button type="button" class="btn btn-primary" @click.prevent="nextLocation">Next Round</button>
         </div>
       </div>

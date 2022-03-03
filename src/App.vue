@@ -2,13 +2,39 @@
   <nav class="navbar  navbar-dark bg-dark py-3">
     <div class="container-fluid-nav text-center">
       <router-link class="navbar-brand" to="/">Where am I?</router-link>
+      <button id="rule-btn" class="btn btn-outline-light btn-lg my-2 my-sm-0" type="button"
+              @click.prevent="displayRules">Rules</button>
+      <RulesModal
+        v-if="showRules"
+       v-on:closeModal="closeModal"
+        />
     </div>
+
 
   </nav>
   <router-view/>
 </template>
 
 <script>
+import RulesModal from './components/modalComponents/RulesModal.vue';
+export default {
+  components: {RulesModal},
+  data: function(){
+    return{
+      showRules:false
+    }
+  },
+  methods:{
+    displayRules(){
+      this.showRules = true;
+    },
+    closeModal(){
+      this.showRules = false;
+    }
+  }
+
+}
+
 </script>
 
 <style>
@@ -28,7 +54,16 @@
 
 .container-fluid-nav a{
   font-weight: 50;
-  font-size: 30px !important;
+  font-size: 30px;
 
+}
+
+.navbar-brand{
+margin-left:6%
+}
+
+#rule-btn{
+  display: inline-block;
+  float:right;
 }
 </style>
