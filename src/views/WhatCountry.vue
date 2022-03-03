@@ -2,6 +2,9 @@
   <h3>Installed CLI Plugins</h3>
   <span>{{this.latitude}} {{this.longitude}}</span>
   <div>{{this.correctCountry}}</div>
+  <div>{{this.numGuesses}}</div>
+  <div>Current Streak: {{this.curStreak}}</div>
+  <div>Max Streak: {{this.maxStreak}}</div>
   <ChoiceList
       :titles = "countryChoices"
       :correct-choice="correctCountry"
@@ -11,6 +14,9 @@
       v-if="roundOver"
       :latitude="latitude"
       :longitude="longitude"
+      :roundWon="roundWon"
+      :location="correctCountry"
+      :origin="'whatCountry'"
       v-on:nextLocation='roundSetup'
   />
 </template>
@@ -30,7 +36,12 @@ name: "NearestCountry",
       correctCountry: null,
       countryChoices:null,
       roundOver: null,
-      curQuestion: 1
+      roundWon: null,
+      numChoices:4,
+      numGuesses:null,
+      curQuestion: 1,
+      curStreak:0,
+      maxStreak:0,
     }
   },
   async created () {
@@ -40,9 +51,10 @@ name: "NearestCountry",
   methods:
       {
         async roundSetup(){
+          this.numGuesses=this.numChoices-1;
           this.roundOver = false;
           await this.getcorrectCountry();
-          await this.generateCountryChoices(4);
+          await this.generateCountryChoices(this.numChoices);
         },
         async getcorrectCountry(){
           let url = `api/landlocation?randomland=yes&json=1`;
@@ -79,8 +91,20 @@ name: "NearestCountry",
 
         handleSelectedChoice(isCorrect){
           if (isCorrect){
+            this.roundWon = true;
             this.roundOver = true;
             this.curQuestion+=1;
+            this.curStreak+=1;
+            if (this.curStreak > this.maxStreak){
+              this.maxStreak = this.curStreak
+            }
+          }else{
+            this.numGuesses-=1;
+            if (this.numGuesses===0){
+              this.roundWon = false;
+              this.roundOver = true;
+              this.curStreak = 0;
+            }
           }
         }
 

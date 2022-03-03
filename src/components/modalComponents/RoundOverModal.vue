@@ -5,7 +5,12 @@
         <div class="modal-header" id="map">
         </div>
         <div class="modal-body">
-          <p>you won!</p>
+
+          <p v-if="roundWon">You got it!</p>
+          <p v-else>Too Bad!</p>
+          <p v-if="origin === 'waterOrLand'">Latitude {{latitude}}
+            and Longitude {{longitude}} is located {{location === "Water" ? "in the water" : "on land"}}</p>
+          <p v-else>Latitude {{latitude}} and Longitude {{longitude}} is located in  {{location}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary">Play Another Game</button>
@@ -22,7 +27,10 @@ export default {
   name: "RoundOverModal",
   props: {
     latitude: Number,
-    longitude: Number
+    longitude: Number,
+    roundWon: Boolean,
+    location: String,
+    origin: String
   },
   data: function() {
     return {

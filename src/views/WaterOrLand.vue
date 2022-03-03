@@ -1,6 +1,8 @@
 <template>
     <span>{{this.latitude}} {{this.longitude}}</span>
     <div>{{this.correctLocation}}</div>
+  <div>Current Streak: {{this.curStreak}}</div>
+  <div>Max Streak: {{this.maxStreak}}</div>
     <ChoiceList
         :titles = "locationOptions"
         :correct-choice="correctLocation"
@@ -10,6 +12,9 @@
         v-if="roundOver"
         :latitude="latitude"
         :longitude="longitude"
+        :roundWon="roundWon"
+        :location="correctLocation"
+        :origin="'waterOrLand'"
         v-on:nextLocation='roundSetup'
     />
 </template>
@@ -22,40 +27,46 @@ export default {
   name: "WaterOrLand",
   components: {
     ChoiceList,
-    RoundOverModal},
-  data: function(){
-   return{
-     latitude: null,
-     longitude: null,
-     correctLocation: null,
-     locationOptions: ["Water", "Land"],
-     roundOver: null,
-     curQuestion: 1,
-   }
+    RoundOverModal
+  },
+  data: function () {
+    return {
+      latitude: null,
+      longitude: null,
+      correctLocation: null,
+      locationOptions: ["Water", "Land"],
+      roundOver: null,
+      roundWon: null,
+      numGuesses: null,
+      curQuestion: 1,
+      curStreak:0,
+      maxStreak:0,
+    }
 
- },
-  async created () {
+  },
+  async created() {
     await this.roundSetup();
 
   },
   methods: {
-    async roundSetup(){
+    async roundSetup() {
+      this.numGuesses = 1;
       this.roundOver = false;
       await this.generateLatitude();
       await this.generateLongitude();
       await this.getWaterOrLand(this.latitude, this.longitude);
     },
-     generateLatitude() {
-      this.latitude = Math.round((Math.random() * 90 * (Math.random() < 0.5 ? -1 : 1))*100)/100;
+    generateLatitude() {
+      this.latitude = Math.round((Math.random() * 90 * (Math.random() < 0.5 ? -1 : 1)) * 100) / 100;
       return this.latitude;
     },
 
     generateLongitude() {
-      this.longitude = Math.round((Math.random() * 180 * (Math.random() < 0.5 ? -1 : 1))*100)/100;
+      this.longitude = Math.round((Math.random() * 180 * (Math.random() < 0.5 ? -1 : 1)) * 100) / 100;
       return this.longitude
     },
 
-    async getWaterOrLand(latitude, longitude){
+    async getWaterOrLand(latitude, longitude) {
       const key = '1yuKk6UQrfcBLdx_Afds';
       let url = `https://api.onwater.io/api/v1/results/${latitude},${longitude}?access_token=${key}`;
       const res = await fetch(url);
@@ -63,11 +74,23 @@ export default {
       this.correctLocation = res_json["water"] ? "Water" : "Land";
     },
 
-    handleSelectedChoice(isCorrect){
-      if (isCorrect){
+    handleSelectedChoice(isCorrect) {
+      if (isCorrect) {
+        this.roundWon = true;
         this.roundOver = true;
-        this.curQuestion+=1;
-
+        this.curQuestion += 1;
+        this.curStreak+=1;
+        if (this.curStreak > this.maxStreak){
+          this.maxStreak = this.curStreak
+        }
+      } else {
+        this.numGuesses -= 1;
+        if (this.numGuesses === 0) {
+          this.roundWon = false;
+          this.roundOver = true;
+          this.curQuestion += 1;
+          this.curStreak = 0;
+        }
       }
     }
   }
