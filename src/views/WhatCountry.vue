@@ -2,16 +2,16 @@
   <h3>Installed CLI Plugins</h3>
   <span>{{this.latitude}} {{this.longitude}}</span>
   <div>{{this.correctCountry}}</div>
-  <div>{{this.gameWon}}</div>
   <ChoiceList
       :titles = "countryChoices"
       :correct-choice="correctCountry"
       :cur-question="curQuestion"
       v-on:choiceSelected='handleSelectedChoice'/>
   <RoundOverModal
-      v-if="gameWon"
+      v-if="roundOver"
       :latitude="latitude"
       :longitude="longitude"
+      v-on:nextLocation='roundSetup'
   />
 </template>
 
@@ -29,7 +29,7 @@ name: "NearestCountry",
       longitude: null,
       correctCountry: null,
       countryChoices:null,
-      gameWon: false,
+      roundOver: null,
       curQuestion: 1
     }
   },
@@ -40,6 +40,7 @@ name: "NearestCountry",
   methods:
       {
         async roundSetup(){
+          this.roundOver = false;
           await this.getcorrectCountry();
           await this.generateCountryChoices(4);
         },
@@ -78,9 +79,8 @@ name: "NearestCountry",
 
         handleSelectedChoice(isCorrect){
           if (isCorrect){
-            this.gameWon = true;
+            this.roundOver = true;
             this.curQuestion+=1;
-            this.roundSetup()
           }
         }
 

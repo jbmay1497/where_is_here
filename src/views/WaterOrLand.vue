@@ -1,16 +1,16 @@
 <template>
     <span>{{this.latitude}} {{this.longitude}}</span>
     <div>{{this.correctLocation}}</div>
-    <div>{{this.gameWon}}</div>
     <ChoiceList
         :titles = "locationOptions"
         :correct-choice="correctLocation"
         :cur-question="curQuestion"
         v-on:choiceSelected='handleSelectedChoice'/>
     <RoundOverModal
-        v-if="gameWon"
+        v-if="roundOver"
         :latitude="latitude"
         :longitude="longitude"
+        v-on:nextLocation='roundSetup'
     />
 </template>
 
@@ -29,7 +29,7 @@ export default {
      longitude: null,
      correctLocation: null,
      locationOptions: ["Water", "Land"],
-     gameWon: false,
+     roundOver: null,
      curQuestion: 1,
    }
 
@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     async roundSetup(){
+      this.roundOver = false;
       await this.generateLatitude();
       await this.generateLongitude();
       await this.getWaterOrLand(this.latitude, this.longitude);
@@ -64,9 +65,8 @@ export default {
 
     handleSelectedChoice(isCorrect){
       if (isCorrect){
-        this.gameWon = true;
-        //this.curQuestion+=1;
-        //this.roundSetup();
+        this.roundOver = true;
+        this.curQuestion+=1;
 
       }
     }

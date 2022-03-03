@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/HomePage.vue'
-import NearestCountry from '../views/WhatCountry.vue'
+import WhatCountry from '../views/WhatCountry.vue'
 import WaterOrLand from '../views/WaterOrLand.vue'
 
 const routes = [
@@ -10,9 +10,9 @@ const routes = [
         component: HomePage
     },
     {
-        path: '/NearestCountry',
-        name: 'NearestCountry',
-        component: NearestCountry
+        path: '/WhatCountry',
+        name: 'WhatCountry',
+        component: WhatCountry
     },
     {
         path: '/WaterOrLand',

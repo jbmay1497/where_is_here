@@ -7,6 +7,10 @@
         <div class="modal-body">
           <p>you won!</p>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary">Play Another Game</button>
+          <button type="button" class="btn btn-primary" @click.prevent="nextLocation">Next Round</button>
+        </div>
       </div>
     </div>
   </div>
@@ -31,7 +35,14 @@ export default {
       center: {lat: this.latitude, lng: this.longitude},
       zoom: 7,
     })
-  }
+  },
+  methods:
+      {
+        nextLocation(){
+          this.$emit('nextLocation')
+        }
+      }
+
 }
 </script>
 
