@@ -1,20 +1,29 @@
 <template>
-  <span>{{this.latitude}} {{this.longitude}}</span>
-  <div>{{this.correctLocation}}</div>
-  <div>{{this.gameWon}}</div>
-  <ChoiceList
-      :titles = "locationOptions"
-      :correct-choice="correctLocation"
-      :cur-question="curQuestion"
-      v-on:choiceSelected='handleSelectedChoice'/>
+  <div>
+    <span>{{this.latitude}} {{this.longitude}}</span>
+    <div>{{this.correctLocation}}</div>
+    <div>{{this.gameWon}}</div>
+    <ChoiceList
+        :titles = "locationOptions"
+        :correct-choice="correctLocation"
+        :cur-question="curQuestion"
+        v-on:choiceSelected='handleSelectedChoice'/>
+    <RoundOverModal
+        :show="gameWon"
+    />
+  </div>
+
 </template>
 
 <script>
 import ChoiceList from '../components/choiceComponents/ChoiceList.vue'
+import RoundOverModal from '../components/RoundOverModal.vue'
 
 export default {
   name: "WaterOrLand",
-  components: {ChoiceList},
+  components: {
+    ChoiceList,
+    RoundOverModal},
   data: function(){
    return{
      latitude: null,
@@ -57,8 +66,8 @@ export default {
     handleSelectedChoice(isCorrect){
       if (isCorrect){
         this.gameWon = true;
-        this.curQuestion+=1;
-        this.roundSetup();
+        //this.curQuestion+=1;
+        //this.roundSetup();
 
       }
     }
