@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     checkCorrect(){
-      this.isCorrect = this.title === this.correctChoice ? this.isCorrect = true : this.isCorrect = false;
+      this.isCorrect = this.title === this.correctChoice;
       this.$emit('choiceSelected',this.isCorrect)
     }
   },
