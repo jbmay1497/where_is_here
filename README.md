@@ -4,12 +4,13 @@
 ```
 npm install
 ```
-
+Please also disable any adblock extensions while using the project as it can prevent the Google Maps API 
+from working properly.
 ### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
+The project runs on port 8080.
 ## Web App Info
 
 This project provides 2 coordinate based guessing games based ona latitude and longitude position:
